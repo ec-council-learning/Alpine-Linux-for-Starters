@@ -140,7 +140,7 @@ Save the file, and then start the nftables service, like this:
 doas rc-service nftables start
 ```
 
-If desire, you can open multiple network ports with only one directive, like this:
+If desired, you can open multiple network ports with only one directive, like this:
 
 ```
 tcp dport { 22, 80, 443 } ct state new accept
@@ -186,7 +186,7 @@ You can see a list of security-related packages that you might find in the Alpin
 
 ## Shell Scripting in Alpine
 
-You can create shell scripts for Alpine Linux that can help you automate repetitive tasks.  The main difference with doing it on Alpine is that Alpine uses the `ash` shell, instead of the bash or `zsh` shells that other Linux distros use.
+You can create shell scripts for Alpine Linux that can help you automate repetitive tasks.  The main difference with doing it on Alpine is that Alpine uses the `ash` shell, instead of the `bash` or `zsh` shells that other Linux distros use.
 
 The first line in a shell script designates the shell that will be used to interpret the script.  For example, to write a script that will only run with the `ash` shell, the line would look like this:
 
@@ -194,7 +194,7 @@ The first line in a shell script designates the shell that will be used to inter
 #!/bin/ash
 ```
 
-This script would run on Alpine, but it wouldn't run on most other Linux distros unless you install the `ash` shell first.  To make the script portable, so that it would run on other Linux distros that don't use ash, make the line look like this:
+This script would run on Alpine, but it won't run on most other Linux distros unless you install the `ash` shell first.  To make the script portable, so that it would run on other Linux distros that don't use ash, make the line look like this:
 
 ```
 #!/bin/sh
@@ -206,7 +206,7 @@ The `sh` is normally a symbolic link that points to executable file for whatever
 
 You can find a procedure for installing Wordpress on an Alpine Linux server [here](https://wiki.alpinelinux.org/wiki/WordPress).  Unfortunately, it's another Alpine procedure that you can only use as a guide, because it's for a very old version of Alpine, and has you try to install old versions of the PHP packages that no longer exist in the Alpine repositories.
 
-In the world of PHP and PHP-based content management systems, things change very quickly, and there's no such thing as backwards compatibility between one version and the next.  Whenever a new version of a content management system, such as Wordpress, get released, it will often require newer versions of the PHP packages.  Also, when new versions of the PHP packages get released, it will often break an existing installation of a content management system.
+In the world of PHP and PHP-based content management systems, things change very quickly, and there's no such thing as backwards compatibility between one version and the next.  Whenever a new version of a content management system, such as Wordpress, gets released, it will often require newer versions of the PHP packages.  Also, when new versions of the PHP packages get released, it will often break an existing installation of a content management system.
 
 In the video, I showed you how to modify the procedure from the Alpine wiki to install the newer versions of PHP that are in Alpine 3.17.  Alpine 3.18 is now out, so the procedure might have to be modified again.  (I don't know that for sure, because I haven't yet tried it with version 3.18.)  The bottom line here is that if you ever need to install any kind of PHP-based content management system on an Alpine Linux server, you'll need to use the Alpine wiki page as your guide, and modify it as necessary so that it will work with the current version of Alpine.
 
@@ -240,7 +240,7 @@ First, on the Ubuntu Server virtual machine that you set up in the previous exer
 docker login
 ```
 
-To create a new Docker image, create a directory for it within your own home directory.  Create a Dockerfile, which will contain the instruction on how Docker is to build your container image.  A simple example would look something like this:
+To create a new Docker image, create a directory for it within your own home directory.  Create a Dockerfile, which will contain the instructions on how Docker is to build your container image.  A simple example would look something like this:
 
 ```
 FROM alpine:3.17
@@ -264,13 +264,13 @@ docker build -t donniet/alpine-security:1.00 .
 
 The `. `at the end of the command tells Docker to look for any additional files within this current working directory.  (Of course, it's not really needed here because there are no additional files for Docker to access.)
 
-Next, upload the new image to your Dockerhub account.  As before, substitute your own Dockerhub username for my own.  If you didn't assign a version nuber to your image, the command would look like this:
+Next, upload the new image to your Dockerhub account.  As before, substitute your own Dockerhub username for my own.  If you didn't assign a version number to your image, the command would look like this:
 
 ```
 docker push donniet/alpine-security
 ```
 
-If you did assign a version number, you'll need to include it in the command, or else docker won't be able to find the image.  So, the command would look like this:
+If you did assign a version number, you'll need to include it in the command, or else Docker won't be able to find the image.  So, the command would look like this:
 
 ```
 docker push donniet/alpine-security:1.00
@@ -328,12 +328,11 @@ buildah copy alpine-working-container HelloWorld.js
 buildah config --entrypoint "node HelloWorld.js" alpine-working-container
 buildah commit alpine-working-container donniet/alpine-demo:v1
 buildah push donniet/alpine-demo:v1
-
 ```
 
 As before, replace `donniet` with the login ID of your own Dockerhub account.
 
-This script tells buildah to create an image that contains everything you need to run a simple Javascript app.  To see this work, create the Helloworld.js file, and make it look like this:
+This script tells buildah to create an image that contains everything you need to run a simple Javascript app.  To see this work, create the `Helloworld.js` file, and make it look like this:
 
 ```
 const express = require('express') 
@@ -341,9 +340,6 @@ const app = express()
 const port = 3000 
 app.get('/', (req, res) => res.send('Hello World!')) 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
-
-
 ```
 
 Add, the executable permission to the shell script:
@@ -372,11 +368,7 @@ curl localhost:8081
 
 You should see the "Hello World!" message pop up.
 
-
-
 When you've finished, stop and remove the container as I've already shown you.
-
-
 
 ## Scanning an Alpine Container
 
@@ -386,9 +378,9 @@ There's already a lot of good existing documentation on how to install and use G
 
 ## Understanding Kubernetes
 
-Kubernetes is an orchestration tool that allows you to divide your container workloads into pods.  Instead of having one big container that runs all of the services that your app needs, you can install each service into a different pod.  This allows you to more easily scale out your application across a network, and to more easily keep the everything updated.  Instead of having to rebuild everything in order to update just one service, you can just update that one service and leave everything else alone.  Kubernetes also allows you to create pod cluster with replica pods, which provides fault tolerance and an easy way to update your app without having to take the app offline.
+Kubernetes is an orchestration tool that allows you to divide your container workloads into pods.  Instead of having one big container that runs all of the services that your app needs, you can install each service into a different pod.  This allows you to more easily scale out your application across a network, and to more easily keep the everything updated.  Instead of having to rebuild everything in order to update just one service, you can just update that one service and leave everything else alone.  Kubernetes also allows you to create pod clusters with replica pods, which provides fault tolerance and an easy way to update your app without having to take the app offline.
 
-Before you can install Kubernetes on your Ubuntu Server virtual machine, you'll need to edit the user@.service unit file.  Open the file in your editor like this:
+Before you can install Kubernetes on your Ubuntu Server virtual machine, you'll need to edit the `user@.service` unit file.  Open the file in your editor like this:
 
 ```
 sudo systemctl edit --full user@.service
@@ -406,7 +398,7 @@ Change it to:
 Delegate=pids memory cpu
 ```
 
-Next, perform thse steps to install the kubectl component of Kubernetes:
+Next, perform these steps to install the `kubectl `component of Kubernetes:
 
 ```
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -422,7 +414,6 @@ kubectl version --short
 kubectl version --short --output=yaml
 
 kubectl version --short --output=json
-
 ```
 
 To create the cluster control node, we'll use Minikube.  Install it like this:
@@ -433,10 +424,7 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 minikube start --container-runtime=containerd
-
 ```
-
-
 
 It takes a long time for Minikube to come up, so be patient.  Once it's up, you'll be ready to create your first cluster.
 
@@ -529,8 +517,6 @@ kubectl exec -ti $POD_NAME -- curl localhost:3000
 
 (We'll create a new service in the next section.)
 
-
-
 ### Scale Up the App
 
 Now, let's scale up by creating some pod replicas.  That way, if one pod crashes, we'll still have others that can handle the load.  Let's start by creating four replicas:
@@ -554,11 +540,7 @@ echo NODE_PORT=$NODE_PORT
 curl $(minikube ip):$NODE_PORT
 ```
 
-
-
 If you invoke the curl command multiple times, you'll hit a different replica each time.  (You can't really tell, so you'll have to take my word for it.)
-
-
 
 Okay, we've decided that we don't really need four replicas.  So, let's scale down to only two replicas:
 
@@ -570,11 +552,9 @@ kubectl get pods -o wide
 
 ### Updating the App
 
-First, open the alpine_demo.sh script in your text editor.  Change both instances of `alpine_demo:v1` to `alpine_demo:v2`.  Save the file and run the script.
+First, open the `alpine_demo.sh` script in your text editor.  Change both instances of `alpine_demo:v1` to `alpine_demo:v2`.  Save the file and run the script.
 
 Now, perform the upgrade:
-
-
 
 ```
 kubectl get deployments
@@ -585,8 +565,6 @@ kubectl get pods
 ```
 
 Note that as each pod replica gets updated, there will always be other replicas that are running the app.  So, service is never interrupted.
-
-
 
 Now, let's test:
 
@@ -621,5 +599,3 @@ kubectl describe pods
 Everything should now be back to normal.
 
 There's still a lot more to Kubernetes than what we've been able to show you, but that's okay.  We've at least been able to give you a taste of how you can use Alpine Linux as a base for your containers, and how to orchestrate them with Kubernetes.
-
-
